@@ -1,5 +1,5 @@
 /// <reference path="../typings/tsd.d.ts" />
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'rxjs/RX'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -11,31 +11,43 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, RX_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (RX_1_1) {
+                RX_1 = RX_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
-                    var debounced = _.debounce(function (text) {
+                    //Observables version
+                    var keyups = RX_1.Observable.fromEvent($("#search"), "keyup");
+                    //keyups.subscribe( data => console.log(data) );
+                    //callback hell version without observables
+                    /*var debounced = _.debounce(function (text) {
                         var url = "https://api.spotify.com/v1/search?type=artist&q=" + text;
                         $.getJSON(url, function (artists) {
+            
                             console.log(artists);
-                            console.log("moep");
-                        });
+            
+            
+                        })
                     }, 400);
-                    $("#search").keyup(function (e) {
+            
+                    $("#search").keyup(function (e: any) {
                         var text = e.target.value;
+            
                         //check for input length
                         if (text.length < 3)
                             return;
+            
                         debounced(text);
-                        console.log(text);
-                    });
+            
+                    });*/
                 }
                 AppComponent = __decorate([
                     core_1.Component({
